@@ -26,6 +26,12 @@ class StringCalculatorTest {
 		assertEquals(Integer.parseInt(expectedOutput),obj.Add(input));
 	}
 	
+	@ParameterizedTest
+	@CsvSource(value={"1>1","1,2>3","11,3,44,78,126>262","100,200,46,3,88,23,456,982,230>2128"},delimiter='>')
+	void test_AddUnknownLengthStringCase(String input,String expectedOutput) {
+		assertEquals(Integer.parseInt(expectedOutput),obj.Add(input));
+	}
+	
 	
 
 }

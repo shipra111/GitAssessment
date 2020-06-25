@@ -2,7 +2,7 @@ package source.codeSample;
 
 public class StringCalculator {
 	
-	public int Add(String numbers) {
+	public int Add(String numbers) throws Exception {
 		int sum=0;
 		if(numbers != null && !numbers.equals("")) {
 			String delimiter = ",";
@@ -15,7 +15,12 @@ public class StringCalculator {
 			}
 			String num[]=numbers.split(delimiter);
 			for(int i=0;i<num.length;i++) {
-				sum+=Integer.parseInt(num[i]);
+				int n = Integer.parseInt(num[i]);
+				if(n<0) {
+					throw new Exception("negatives not allowed: "+n);
+				}else {
+					sum+=n;
+				}
 			}
 		}
 		return sum;

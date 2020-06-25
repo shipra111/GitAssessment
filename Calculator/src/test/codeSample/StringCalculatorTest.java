@@ -2,7 +2,6 @@ package test.codeSample;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -39,6 +38,11 @@ class StringCalculatorTest {
 		assertEquals(Integer.parseInt(input[1]),obj.Add(input[0]));
 	}
 	
+	@ParameterizedTest
+	@ValueSource(strings={"//;\n1;2;3o6","//$\n1$22$34$100o157","//.\n10.2.5o17","//#\n10#2#5o17"})
+	void test_AddStringWithDelimiterCase(String strinput) {
+		String input[] = strinput.split("o");
+		assertEquals(Integer.parseInt(input[1]),obj.Add(input[0]));
+	}
 	
-
 }

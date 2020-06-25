@@ -67,8 +67,19 @@ class StringCalculatorTest {
 	}
 	
 	@ParameterizedTest
-	@ValueSource(strings={"//;\n-1;2;3o-1","11,-3\n44,78\n-126o-3","1,-2o-2"})
+	@ValueSource(strings={"//;\n-1;2;3o-1","11,-3\n44,78\n126o-3","1,-2o-2"})
 	void test_AddStringWithNegativeNumberCase(String strinput) {
+		String input[] = strinput.split("o");
+		Throwable exception = assertThrows(Exception.class, () -> {
+			obj.Add(input[0]);
+		});
+		assertEquals("negatives not allowed: "+input[1],exception.getMessage());
+		
+	}
+	
+	@ParameterizedTest
+	@ValueSource(strings={"//;\n-1;-2;3o-1,-2","11,-3\n-44,78\n-126o-3,-44,-126","-1,-2o-1,-2"})
+	void test_AddStringWithMultipleNegativeNumberCase(String strinput) {
 		String input[] = strinput.split("o");
 		Throwable exception = assertThrows(Exception.class, () -> {
 			obj.Add(input[0]);

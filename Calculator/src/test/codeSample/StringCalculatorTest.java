@@ -13,7 +13,7 @@ import source.codeSample.StringCalculator;
 class StringCalculatorTest {
 
 	StringCalculator obj = new StringCalculator();
-	
+		
 	@ParameterizedTest
 	@NullAndEmptySource
 	void test_AddBlankStringCase(String input) {
@@ -86,6 +86,16 @@ class StringCalculatorTest {
 		});
 		assertEquals("negatives not allowed: "+input[1],exception.getMessage());
 		
+	}
+	
+	@ParameterizedTest
+	@CsvSource(value={"1000,2:1002","1001,3,44,78,126:251","952,2:954"},delimiter=':')
+	void test_AddStringWithNumberBelow1000PlusCase(String input,String expectedOutput) {
+		try {
+			assertEquals(Integer.parseInt(expectedOutput),obj.Add(input));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

@@ -7,7 +7,7 @@ public class StringCalculator {
 		if(numbers != null && !numbers.equals("")) {
 			
 			String delimiter = ",", neg="";
-			if(numbers.contains("//")) { //  //[delimiter]\n[numbers]
+			if(numbers.startsWith("//")) { //  //[delimiter]\n[numbers]
 				int index = numbers.indexOf("\n");
 				delimiter = "\\"+numbers.substring(index-1,index);
 				numbers = numbers.substring(index+1);
@@ -20,7 +20,7 @@ public class StringCalculator {
 				int n = Integer.parseInt(num[i]);
 				if(n<0)
 					neg +=num[i]+",";
-				else
+				else if(n<=1000)
 					sum+=n;
 			}
 			
@@ -30,5 +30,6 @@ public class StringCalculator {
 		}
 		return sum;
 	}
+	
 
 }

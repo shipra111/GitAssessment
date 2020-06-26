@@ -2,7 +2,10 @@ package source.codeSample;
 
 public class StringCalculator {
 	
+	private static int count = 0;
+	
 	public int Add(String numbers) throws Exception {
+		count++;
 		int sum=0;
 		if(numbers != null && !numbers.equals("")) {
 			
@@ -28,6 +31,10 @@ public class StringCalculator {
 			}
 		}
 		return sum;
+	}
+	
+	public int GetCalledCount() {
+		return count;
 	}
 	
 

@@ -3,6 +3,7 @@ package test.codeSample;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -12,13 +13,15 @@ import source.codeSample.StringCalculator;
 
 class StringCalculatorTest {
 
-	StringCalculator obj = new StringCalculator();
-		
+	StringCalculator obj = new StringCalculator();	
+	private static int count = 0;
+	
 	@ParameterizedTest
 	@NullAndEmptySource
 	void test_AddBlankStringCase(String input) {
 		try {
 			assertEquals(0,obj.Add(input));
+			count++;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -29,8 +32,9 @@ class StringCalculatorTest {
 	void test_AddOneOrTwoStringCase(String input,String expectedOutput) {
 		try {
 			assertEquals(Integer.parseInt(expectedOutput),obj.Add(input));
+			count++;
 		} catch (Exception e) {
-			e.printStackTrace();
+			assertEquals("negatives not allowed: "+expectedOutput,e.getMessage());
 		}
 	}
 	
@@ -39,8 +43,9 @@ class StringCalculatorTest {
 	void test_AddUnknownLengthStringCase(String input,String expectedOutput) {
 		try {
 			assertEquals(Integer.parseInt(expectedOutput),obj.Add(input));
+			count++;
 		} catch (Exception e) {
-			e.printStackTrace();
+			assertEquals("negatives not allowed: "+expectedOutput,e.getMessage());
 		}
 	}
 	
@@ -50,8 +55,9 @@ class StringCalculatorTest {
 		String input[] = strinput.split("o");
 		try {
 			assertEquals(Integer.parseInt(input[1]),obj.Add(input[0]));
+			count++;
 		} catch (Exception e) {
-			e.printStackTrace();
+			assertEquals("negatives not allowed: "+input[1],e.getMessage());
 		}
 	}
 	
@@ -61,8 +67,9 @@ class StringCalculatorTest {
 		String input[] = strinput.split("o");
 		try {
 			assertEquals(Integer.parseInt(input[1]),obj.Add(input[0]));
+			count++;
 		} catch (Exception e) {
-			e.printStackTrace();
+			assertEquals("negatives not allowed: "+input[1],e.getMessage());
 		}
 	}
 	
@@ -72,6 +79,7 @@ class StringCalculatorTest {
 		String input[] = strinput.split("o");
 		Throwable exception = assertThrows(Exception.class, () -> {
 			obj.Add(input[0]);
+			count++;
 		});
 		assertEquals("negatives not allowed: "+input[1],exception.getMessage());
 		
@@ -83,6 +91,7 @@ class StringCalculatorTest {
 		String input[] = strinput.split("o");
 		Throwable exception = assertThrows(Exception.class, () -> {
 			obj.Add(input[0]);
+			count++;
 		});
 		assertEquals("negatives not allowed: "+input[1],exception.getMessage());
 		
@@ -93,8 +102,9 @@ class StringCalculatorTest {
 	void test_AddStringWithNumberBelow1000PlusCase(String input,String expectedOutput) {
 		try {
 			assertEquals(Integer.parseInt(expectedOutput),obj.Add(input));
+			count++;
 		} catch (Exception e) {
-			e.printStackTrace();
+			assertEquals("negatives not allowed: "+expectedOutput,e.getMessage());
 		}
 	}
 	
@@ -104,8 +114,9 @@ class StringCalculatorTest {
 		String input[] = strinput.split("o");
 		try {
 			assertEquals(Integer.parseInt(input[1]),obj.Add(input[0]));
+			count++;
 		} catch (Exception e) {
-			e.printStackTrace();
+			assertEquals("negatives not allowed: "+input[1],e.getMessage());
 		}
 	}
 	
@@ -115,8 +126,9 @@ class StringCalculatorTest {
 		String input[] = strinput.split("o");
 		try {
 			assertEquals(Integer.parseInt(input[1]),obj.Add(input[0]));
+			count++;
 		} catch (Exception e) {
-			e.printStackTrace();
+			assertEquals("negatives not allowed: "+input[1],e.getMessage());
 		}
 	}
 	
@@ -126,9 +138,16 @@ class StringCalculatorTest {
 		String input[] = strinput.split("o");
 		try {
 			assertEquals(Integer.parseInt(input[1]),obj.Add(input[0]));
+			count++;
 		} catch (Exception e) {
-			e.printStackTrace();
+			assertEquals("negatives not allowed: "+input[1],e.getMessage());
 		}
 	}
+	
+	@Test
+	public void test_getCountofAddInvokation() {
+		assertEquals(count,obj.GetCalledCount());
+	}
+	
 	
 }

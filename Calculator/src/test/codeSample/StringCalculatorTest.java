@@ -120,4 +120,15 @@ class StringCalculatorTest {
 		}
 	}
 	
+	@ParameterizedTest
+	@ValueSource(strings={"//[;;][$$]\n1$$2;;3o6","//[*****][%%%]\n1*****22%%%34%%%100o157","//[####][@@@@@@@@@@][..]\n10@@@@@@@@@@2..5####4o21"})
+	void test_AddStringWithMultipleAnyLengthDelimiterCase(String strinput) {
+		String input[] = strinput.split("o");
+		try {
+			assertEquals(Integer.parseInt(input[1]),obj.Add(input[0]));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 }

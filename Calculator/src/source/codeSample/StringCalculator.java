@@ -6,22 +6,21 @@ public class StringCalculator {
 		int sum=0;
 		if(numbers != null && !numbers.equals("")) {
 			
-			String delimiter = ",", neg="";
+			String delimiter = "[^0-9\\-]", neg="";
 			if(numbers.startsWith("//")) { //  //[delimiter]\n[numbers]
 				int index = numbers.indexOf("\n");
-				delimiter = "\\"+numbers.substring(index-1,index);
 				numbers = numbers.substring(index+1);
-			}else if(numbers.contains("\n")) { //  , and \n
-				delimiter += "|\n";
 			}
 			
 			String num[]=numbers.split(delimiter);
 			for(int i=0;i<num.length;i++) {
-				int n = Integer.parseInt(num[i]);
-				if(n<0)
-					neg +=num[i]+",";
-				else if(n<=1000)
-					sum+=n;
+				if(!num[i].equals("")) {
+					int n = Integer.parseInt(num[i]);
+					if(n<0)
+						neg +=num[i]+",";
+					else if(n<=1000)
+						sum+=n;
+				}
 			}
 			
 			if(neg.length()>0) {
